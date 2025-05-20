@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Название вашего проекта</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Технические работы | Мой проект</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Иконочный шрифт для контактов -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Шапка сайта -->
     <header>
         <div class="container">
-            <h1>Добро пожаловать на мой сайт</h1>
             <nav>
-                <ul>
+                <a href="#" class="logo">МойПроект</a>
+                <ul class="nav-links">
                     <li><a href="#">Главная</a></li>
                     <li><a href="#">О нас</a></li>
-                    <li><a href="#">Контакты</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
                 </ul>
             </nav>
         </div>
@@ -25,26 +27,98 @@
     <main class="container">
         <section>
             <h2>О проекте</h2>
-            <p>Это стартовая страница моего нового веб-проекта.</p>
+            <p>Это стартовая страница моего нового веб-проекта. Скоро здесь появится что-то интересное!</p>
         </section>
         
-        <section>
-            <h1>Ведутся тех.работы</h1>
+        <section class="maintenance">
+            <h1>Наши услуги</h1>
+            <p>Запись вокала  От 1000 руб</p>
+            <p>Аренда студии   От 2000 руб.</p>
+            <p>Сведения вокала   От 3000 руб.</p>
+            <p>Написание аранжировки   От 3000 руб.</p>
+            <p>Снятие клипа   От 5000 руб.</p>
+            <p>Написание текстов   От 2000руб</p>
         </section>
     </main>
 
-    <!-- Подвал сайта -->
-    <footer>
+    <main class="container2">
+        <section class="maintenance">
+            <h1>Нашe оборудование</h1>
+            <p>1. FOCUSRITE Scarlett 8i6 3rd Gen – 8-канальный USB-аудиоинтерфейс с высококачественными предусилителями, фантомным питанием и низкой задержкой. Идеален для многоканальной записи и профессиональной работы со звуком.</p>
+            <p>2. Prodipe PROSTC3DMK2 STC-3D MK2 Lanen – конденсаторный микрофон с большой диафрагмой, подходит для вокала, акустических инструментов и озвучки. Четкий и детализированный звук.</p>
+            <p>3. Prodipe PROMC1 MC-1 Lanen – динамический микрофон с кардиоидной направленностью. Надежен для живых выступлений и записи ударных, гитарных кабинетов.</p>
+            <p>4. SOUNDKING DD005B – микрофонная стойка "журавль" (100–176 см), металлический узел, прочная стальная конструкция. Удобна для точного позиционирования микрофона.</p>
+            <p>5. Beyerdynamic DT 770 Pro (80 Ohm) – закрытые студийные наушники с точным звуком и комфортом для долгой работы. Отличная изоляция и детализация низких частот.</p>
+            <p>6. MACKIE CR8BT – студийные мониторы (пара) с Bluetooth, сбалансированным звуком и мощными низкими частотами. Подходят для сведения и мастеринга.</p>
+            <p>7. Soundking DB039B – регулируемая стойка для студийных мониторов (690–1300 мм), стальная конструкция. Обеспечивает оптимальное позиционирование акустики.</p>
+            <p>8. Nektar SE61 – USB MIDI-клавиатура с 61 клавишей, полувзвешенной механикой и удобным управлением. Совместима с большинством DAW.</p>
+            <p>9. PARKWOOD S66 – электроакустическая гитара (дредноут с вырезом) с качественной древесиной и встроенным звукоснимателем. В комплекте чехол.</p>
+            <p>10. Prodipe JMFST93ALDERTBK – электрогитара ST93 в черном цвете с хамбакерами, подходит для рока, блюза и металла.</p>
+            <p>11. Alctron PF32-MKII – акустический экран для вокальной записи, снижает отражения и фоновые шумы.</p>
+        </section>
+    </main>
+
+    <!-- Подвал сайта с контактами -->
+    <footer id="contacts">
         <div class="container">
+            <div class="contacts">
+                <h3>Наши контакты</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Адрес</h4>
+                        <p>г. Москва, ул. Примерная, д. 123</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <h4>Телефон</h4>
+                        <p>+7 (904) 520-83-44</p>
+                    </div>
+                    <div class="contact-item" onclick="window.open('https://t.me/difeli_official', '_blank')">
+                        <i class="fab fa-telegram"></i>
+                        <h4>Telegram</h4>
+                        <p>@DIZYLI_IRI</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>Часы работы</h4>
+                        <p>Пн-Пт: 10:00 - 22:00<br>Сб-Вс: 12:00 - 20:00</p>
+                    </div>
+                </div>
+            </div>
             <p>&copy; 2025 Мой проект. Все права защищены.</p>
         </div>
     </footer>
 
     <!-- Подключение JavaScript -->
     <script>
-        // Базовый JavaScript код
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Страница загружена!');
+            
+            // Анимация при скролле
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
+                document.querySelector('header').style.background = scrollPosition > 50 
+                    ? 'rgba(255, 255, 255, 0.95)' 
+                    : 'rgba(255, 255, 255, 0.9)';
+            });
+            
+            // Плавная прокрутка для всех якорных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
