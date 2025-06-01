@@ -23,6 +23,46 @@
         </div>
     </header>
 
+    <!-- Кнопка "Оставить заявку" -->
+    <div class="application-button-container">
+        <button id="openApplicationForm" class="application-button">Оставить заявку</button>
+    </div>
+
+    <!-- Модальное окно с формой заявки -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Оставить заявку</h2>
+            <form id="applicationForm">
+                <div class="form-group">
+                    <label for="name">Ваше имя:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Выберите услугу:</label>
+                    <select id="service" name="service" required>
+                        <option value="">Выберите услугу</option>
+                        <option value="Запись вокала">Запись вокала</option>
+                        <option value="Аренда студии">Аренда студии</option>
+                        <option value="Сведение вокала">Сведение вокала</option>
+                        <option value="Написание аранжировки">Написание аранжировки</option>
+                        <option value="Снятие клипа">Снятие клипа</option>
+                        <option value="Написание текстов">Написание текстов</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение:</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+                <button type="submit" class="submit-button">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Основное содержимое -->
     <main class="container">
         <section>
@@ -118,6 +158,61 @@
                         });
                     }
                 });
+            });
+
+            // Код для модального окна
+            const modal = document.getElementById('applicationModal');
+            const openBtn = document.getElementById('openApplicationForm');
+            const closeBtn = document.querySelector('.close');
+            const form = document.getElementById('applicationForm');
+
+            openBtn.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            // Обработка отправки формы
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const formData = {
+                    name: document.getElementById('name').value,
+                    phone: document.getElementById('phone').value,
+                    service: document.getElementById('service').value,
+                    message: document.getElementById('message').value
+                };
+
+                try {
+                    const response = await fetch('http://localhost:3000/submit-application', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert('Заявка успешно отправлена!');
+                        modal.style.display = "none";
+                        form.reset();
+                    } else {
+                        alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже.');
+                }
             });
         });
     </script>
