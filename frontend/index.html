@@ -132,6 +132,11 @@
 
     <!-- Подключение JavaScript -->
     <script>
+        // Добавляем конфигурацию API
+        const API_URL = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000' 
+            : 'https://your-backend-url.com'; // Здесь нужно будет указать URL вашего бэкенда
+
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Страница загружена!');
             
@@ -180,7 +185,7 @@
                 }
             }
 
-            // Обработка отправки формы
+            // Обновляем URL в обработчике формы
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
@@ -192,7 +197,7 @@
                 };
 
                 try {
-                    const response = await fetch('http://localhost:3000/submit-application', {
+                    const response = await fetch(`${API_URL}/submit-application`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
