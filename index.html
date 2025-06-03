@@ -133,7 +133,7 @@
     <!-- Подключение JavaScript -->
     <script>
         // Конфигурация API
-        const API_URL = 'https://rtr-7g49.onrender.com'; // URL вашего сервера на Render
+        const API_URL = 'http://localhost:10000'; // Используем локальный сервер для тестирования
 
         // Добавляем обработку ошибок и логирование
         async function sendApplication(formData) {
@@ -143,6 +143,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify(formData)
                 });
