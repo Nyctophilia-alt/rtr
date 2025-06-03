@@ -132,10 +132,8 @@
 
     <!-- Подключение JavaScript -->
     <script>
-        // Добавляем конфигурацию API
-        const API_URL = window.location.hostname === 'localhost' 
-            ? 'http://localhost:3000' 
-            : 'https://rtr-7g49.onrender.com'; // Здесь нужно будет указать URL вашего бэкенда
+        // Конфигурация API
+        const API_URL = 'https://rtr-backend.onrender.com'; // Замените на ваш URL от Render.com
 
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Страница загружена!');
