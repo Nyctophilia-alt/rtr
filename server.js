@@ -4,28 +4,25 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 
 // Telegram bot configuration
 const bot = new TelegramBot('8160749595:AAHLCQg8auCttCJT5zW9nrtsjX_U5o-7eD0', { polling: false });
 const CHAT_ID = '8160749595';
 
-// Настройка CORS
-app.use(cors({
-    origin: ['https://nyctophilia-alt.github.io', 'http://localhost:3000'],
-    methods: ['POST', 'GET', 'OPTIONS'],
-    allowedHeaders: ['Content-Type']
-}));
+// Настройка CORS для всех доменов
+app.use(cors());
+app.options('*', cors()); // Включаем предварительные запросы CORS
 
 app.use(express.json());
 
-// Проверка работы сервера
+// Тестовый маршрут
 app.get('/', (req, res) => {
     res.json({ status: 'Server is running' });
 });
 
 app.post('/submit-application', async (req, res) => {
-    console.log('Received request:', req.body);
+    console.log('Получен запрос:', req.body);
     
     try {
         const { name, phone, service, message } = req.body;
@@ -34,7 +31,7 @@ app.post('/submit-application', async (req, res) => {
         if (!name || !phone || !service) {
             return res.status(400).json({ 
                 success: false, 
-                error: 'Missing required fields' 
+                error: 'Не заполнены обязательные поля' 
             });
         }
         
@@ -46,19 +43,19 @@ app.post('/submit-application', async (req, res) => {
 💬 Сообщение: ${message || 'Не указано'}
         `;
         
-        console.log('Attempting to send message:', text);
-        console.log('To chat ID:', CHAT_ID);
+        console.log('Отправка сообщения в Telegram:', text);
+        console.log('ID чата:', CHAT_ID);
         
         const result = await bot.sendMessage(CHAT_ID, text);
-        console.log('Message sent successfully:', result);
+        console.log('Сообщение успешно отправлено:', result);
         
         res.json({ success: true });
     } catch (error) {
-        console.error('Detailed error:', error);
-        console.error('Error stack:', error.stack);
+        console.error('Ошибка:', error);
+        console.error('Стек ошибки:', error.stack);
         res.status(500).json({ 
             success: false, 
-            error: 'Failed to send message',
+            error: 'Ошибка при отправке сообщения',
             details: error.message 
         });
     }
@@ -66,14 +63,14 @@ app.post('/submit-application', async (req, res) => {
 
 // Обработка ошибок
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+    console.error('Ошибка сервера:', err.stack);
     res.status(500).json({ 
         success: false, 
-        error: 'Something broke!',
+        error: 'Внутренняя ошибка сервера',
         details: err.message
     });
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Сервер запущен на http://localhost:${port}`);
 }); 

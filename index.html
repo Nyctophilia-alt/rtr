@@ -133,7 +133,30 @@
     <!-- Подключение JavaScript -->
     <script>
         // Конфигурация API
-        const API_URL = 'https://rtr-7g49.onrender.com'; // Убедитесь, что это ваш актуальный URL от Render.com
+        const API_URL = 'https://rtr-7g49.onrender.com'; // URL вашего сервера на Render
+
+        // Добавляем обработку ошибок и логирование
+        async function sendApplication(formData) {
+            try {
+                console.log('Отправка данных:', formData);
+                const response = await fetch(`${API_URL}/submit-application`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                console.log('Ответ сервера:', response);
+                const result = await response.json();
+                console.log('Данные ответа:', result);
+
+                return result;
+            } catch (error) {
+                console.error('Ошибка при отправке:', error);
+                throw error;
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Страница загружена!');
@@ -183,7 +206,7 @@
                 }
             }
 
-            // Обновляем URL в обработчике формы
+            // Обновляем обработчик формы
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
@@ -195,22 +218,13 @@
                 };
 
                 try {
-                    const response = await fetch(`${API_URL}/submit-application`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(formData)
-                    });
-
-                    const result = await response.json();
-
+                    const result = await sendApplication(formData);
                     if (result.success) {
                         alert('Заявка успешно отправлена!');
                         modal.style.display = "none";
                         form.reset();
                     } else {
-                        alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже.');
+                        alert(`Ошибка: ${result.error || 'Неизвестная ошибка'}`);
                     }
                 } catch (error) {
                     console.error('Error:', error);
