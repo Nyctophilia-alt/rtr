@@ -2,9 +2,9 @@
   "name": "studio-booking",
   "version": "1.0.0",
   "description": "Studio booking application with Telegram integration",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node backend/server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
